@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EaAppAutomationTesting")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+37be61c7117fd27b1d545914606a3b76635a8aec")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f5ba2445fcd84af60feed837384994fb203c5c25")]
 [assembly: System.Reflection.AssemblyProductAttribute("EaAppAutomationTesting")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EaAppAutomationTesting")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
