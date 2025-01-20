@@ -18,6 +18,9 @@ namespace EaAppAutomationTesting.Pages
         private ILocator employeeListSection => page.Locator("text=Employee List");
         //private ILocator employee => page.Locator("text=Employee List");
         private ILocator employeesTable => page.Locator("table");
+        private ILocator searchField => page.Locator("input[name=searchTerm]");
+        private ILocator searchButton => page.Locator("text=Search");
+
 
         public async  Task clickOnEmployeeListLink()
         {
@@ -97,6 +100,15 @@ namespace EaAppAutomationTesting.Pages
             }
 
 
+        }
+
+        public async Task fillSearchField(string name)
+        {
+            await searchField.FillAsync(name);
+        }
+        public async Task clickSearchButton()
+        {
+            await searchButton.ClickAsync();
         }
 
         public EmployeeListPage(IPage page)

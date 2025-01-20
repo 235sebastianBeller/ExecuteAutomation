@@ -27,8 +27,8 @@ namespace EaAppAutomationTesting.Drivers
             _playwright = await Playwright.CreateAsync();
             _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
             {
-                Headless = true, // Cambiar a "true" si no se necesita ver el navegador caso contrario false
-                SlowMo = 1000 // Delay 
+                Headless = false, // Cambiar a "true" si no se necesita ver el navegador caso contrario false
+                SlowMo = 2000 // Delay 
             });
 
             _context = await _browser.NewContextAsync();

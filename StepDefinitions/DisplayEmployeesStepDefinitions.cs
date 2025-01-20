@@ -2,6 +2,8 @@ using System;
 using EaAppAutomationTesting.Pages;
 using TechTalk.SpecFlow;
 using EaAppAutomationTesting.Hooks;
+using TechTalk.SpecFlow.Assist;
+using ServiceStack;
 
 
 namespace EaAppAutomationTesting.StepDefinitions
@@ -31,5 +33,23 @@ namespace EaAppAutomationTesting.StepDefinitions
             await employeesPage.verifyEmployeeList(PlaywrightHooks.Employees);
             //throw new PendingStepException();
         }
+
+        [When(@"I search the list of matches for ""([^""]*)""")]
+        public async Task WhenISearchTheListOfMatchesFor(string name)
+        {
+            await employeesPage.fillSearchField(name);
+            await employeesPage.clickSearchButton();
+        }
+
+        [Then(@"I should see the list of employees that matches for ""([^""]*)""")]
+        public async Task ThenIShouldSeeTheListOfEmployeesThatMatchesFor(string name)
+        {
+            //throw new PendingStepException();
+            await employeesPage.verifyEmployeeList(PlaywrightHooks.Employees.FindAll(e=>e.Name.StartsWith(name)));
+        }
+
+
+
+
     }
 }
