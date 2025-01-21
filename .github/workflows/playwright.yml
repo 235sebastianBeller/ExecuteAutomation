@@ -1,0 +1,22 @@
+﻿name: Playwright Tests
+on:
+  deployment_status:
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    if: github.event.deployment_status.state == 'success'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - run: dotnet build
+      - name: Ensure browsers are installed
+        run: pwsh bin/Debug/net8.0/playwright.ps1 install --with-deps
+      - name: Run tests
+        run: dotnet test
+        env:
+          # This might depend on your test-runner
+          PLAYWRIGHT_TEST_BASE_URL: ${{ github.event.deployment_status.target_url }}
