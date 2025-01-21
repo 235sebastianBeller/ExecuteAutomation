@@ -1,43 +1,53 @@
 ﻿name: .NET Playwright CI/CD
 
-# Define los eventos que activan el flujo de trabajo
 on:
   push:
     branches:
-      - main      # Se ejecuta cuando se hace push a la rama 'main'
+      - main
   pull_request:
     branches:
-      - main      # Se ejecuta cuando se hace un pull request hacia la rama 'main'
+      - main
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # El runner puede ser Windows o MacOS también, pero elegimos Ubuntu en este caso
+    runs-on: ubuntu-latest
 
     steps:
-      # 1. Hacer checkout del código
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # 2. Configurar .NET SDK
       - name: Set up .NET SDK
         uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: '6.0'  # O la versión que estés utilizando
+          dotnet-version: '6.0'  # Ajusta según la versión de .NET que uses
 
-      # 3. Restaurar dependencias del proyecto
       - name: Restore dependencies
         run: dotnet restore
 
-      # 4. Construir el proyecto
       - name: Build the project
         run: dotnet build --configuration Release
 
-      # 5. Ejecutar las pruebas con Playwright
       - name: Install Playwright dependencies
         run: |
-          sudo apt-get install -y libgbm-dev
+          sudo apt-get update
+          sudo apt-get install -y \
+            libgbm-dev \
+            libxcomposite1 \
+            libxrandr2 \
+            libasound2 \
+            libatk-bridge2.0-0 \
+            libatk1.0-0 \
+            libcups2 \
+            libx11-xcb1 \
+            libnss3 \
+            libnspr4 \
+            libu2f-udev \
+            libvulkan1
+          
+      - name: Install Playwright
+        run: |
           npm install -g playwright
 
       - name: Run Playwright tests
         run: |
-          dotnet test --configuration Release  # Ejecuta las pruebas de Playwright con .NET
+          dotnet test --configuration Release
