@@ -11,10 +11,12 @@ Scenario Outline: Show Welcome Message to the registered user
 	And I enter following login details
 		| UserName		| Password	 |
 		|  <UserName>   | <Password> |
-	When I press the "Log In" button
+	When I press the Log In button
 	Then I should see the following message "Hello <UserName>!"
 Examples: 
 	| UserName   | Password |
 	| admin      | password |
 	| juan perez | Juan.123 |
+
+
 

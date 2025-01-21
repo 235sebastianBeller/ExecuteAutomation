@@ -14,10 +14,13 @@ namespace playwrigthSpecFlowProject.StepDefinitions
     public class LoginPageStepDefinitions
     {
         private readonly LoginPage loginPage;
+        private readonly HomePage homePage;
+
 
         public LoginPageStepDefinitions()
         {
             loginPage = new LoginPage(PlaywrightHooks.Driver.Page);
+            homePage= new HomePage(PlaywrightHooks.Driver.Page);
         }
 
         [Given(@"I navigate to application")]
@@ -29,7 +32,7 @@ namespace playwrigthSpecFlowProject.StepDefinitions
         [Given(@"I click login link")]
         public async Task GivenIClickLoginLink()
         {
-            await loginPage.clickLogInInputNav();
+            await homePage.clickLogInInputNav();
         }
 
         [Given(@"I enter following login details")]
@@ -42,8 +45,8 @@ namespace playwrigthSpecFlowProject.StepDefinitions
 
         }
 
-        [When(@"I press the ""([^""]*)"" button")]
-        public async Task WhenIPressTheButton(string p0)
+        [When(@"I press the Log In button"), Given(@"I press the Log In button")]
+        public async Task WhenIPressTheButton()
         {
             await loginPage.clickLogInButton();
         }
@@ -53,5 +56,6 @@ namespace playwrigthSpecFlowProject.StepDefinitions
         {
             await loginPage.verifyWelcomeMessage(message);
         }
+        
     }
 }

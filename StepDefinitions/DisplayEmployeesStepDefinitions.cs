@@ -31,7 +31,6 @@ namespace EaAppAutomationTesting.StepDefinitions
         {
 
             await employeesPage.verifyEmployeeList(PlaywrightHooks.Employees);
-            //throw new PendingStepException();
         }
 
         [When(@"I search the list of matches for ""([^""]*)""")]

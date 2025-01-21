@@ -14,7 +14,6 @@ namespace EaAppAutomationTesting.Pages
         private IPage page;
 
 
-        private ILocator loginInputNav() => page.Locator("text=Login");
 
         private ILocator txtUserName() => page.Locator("#UserName");
         private ILocator txtPassword() => page.Locator("#Password");
@@ -22,6 +21,8 @@ namespace EaAppAutomationTesting.Pages
         private ILocator txtWelcomeMessage() => page.Locator("a[title='Manage']");
 
         private ILocator loginButton() => page.Locator("text='Log in'");
+      
+
 
         public async Task fillUserName(string username)
             => await this.txtUserName().FillAsync(username);
@@ -29,14 +30,7 @@ namespace EaAppAutomationTesting.Pages
         public async Task fillPassword(string password)
             => await this.txtPassword().FillAsync(password);
 
-        public async Task clickLogInInputNav()
-        {
-            var response = await page.RunAndWaitForResponseAsync(async () =>
-            {
-                await this.loginInputNav().ClickAsync();
-            }, x => x.Status == 200 && x.Request.Method == "GET"); // verificamos que el status sea 200, la repuesta
-            await page.WaitForURLAsync("**/Account/Login");// vemos la url del navegador
-        }
+    
 
         public async Task clickLogInButton()
         {
@@ -44,6 +38,7 @@ namespace EaAppAutomationTesting.Pages
             await page.WaitForURLAsync("http://eaapp.somee.com/");
 
         }
+
 
         public async Task login(string username, string password)
         {
